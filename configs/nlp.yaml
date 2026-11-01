@@ -1,0 +1,88 @@
+model_name: nlp
+
+tokenizer:
+  path: configs/vocabs/nlp_tokenizer.json
+  vocab_size: 16000
+  min_frequency: 2
+
+model:
+  max_length: 512
+  d_model: 256
+  n_heads: 8
+  n_layers: 4
+  d_ff: 1024
+  dropout: 0.1
+  activation: gelu
+
+embeddings:
+  use_layout: true
+  use_page: true
+  use_region_type: false
+  box_bins: 64
+
+pretrain:
+  mask_prob: 0.15
+  corpus_manifest: data/splits/nlp_pretrain.jsonl
+  checkpoint: outputs/checkpoints/nlp/pretrain
+  train:
+    batch_size: 16
+    learning_rate: 0.0003
+    weight_decay: 0.01
+    optimizer: adamw
+    scheduler: cosine
+    warmup_steps: 500
+    max_epochs: 5
+    grad_clip: 1.0
+    mixed_precision: false
+    grad_accum: 1
+    num_workers: 0
+    seed: 42
+    device: cuda
+    allow_cpu_fallback: true
+
+finetune:
+  pretrain_checkpoint: outputs/checkpoints/nlp/pretrain/best.pt
+  train_manifest: data/splits/nlp_finetune_train.jsonl
+  val_manifest: data/splits/nlp_finetune_val.jsonl
+  use_reader_outputs: false
+  field_labels:
+    - person_name
+    - date
+    - plate
+    - amount
+    - document_number
+    - label
+  document_classes:
+    - unknown
+    - invoice
+    - identity
+    - form
+  tasks:
+    field_extraction: true
+    relation_extraction: true
+    document_classification: true
+  loss_weights:
+    field: 1.0
+    relation: 0.5
+    document: 0.5
+  train:
+    batch_size: 8
+    learning_rate: 0.00005
+    weight_decay: 0.01
+    optimizer: adamw
+    scheduler: cosine
+    warmup_steps: 200
+    max_epochs: 10
+    grad_clip: 1.0
+    mixed_precision: false
+    grad_accum: 1
+    num_workers: 0
+    seed: 42
+    device: cuda
+    allow_cpu_fallback: true
+
+checkpoint:
+  dir: outputs/checkpoints/nlp
+  save_every: 1
+  best_metric: field_f1
+  best_mode: max

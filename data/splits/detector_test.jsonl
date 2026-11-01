@@ -1,0 +1,2 @@
+{"id": "syn_000001", "source_id": "family_43", "image_path": "images/000001.png", "text": "Türkiye", "font": "C:\\Windows\\Fonts\\GARA.TTF", "font_size": 25, "seed": 43, "kind": "word", "distortions": ["brightness"], "box_xyxy": [9, 1, 83, 24], "boxes_xyxy": [[9, 1, 83, 24]]}
+{"id": "syn_000010", "source_id": "family_52", "image_path": "images/000010.png", "text": "11.05.1999", "font": "C:\\Windows\\Fonts\\cour.ttf", "font_size": 28, "seed": 52, "kind": "date", "distortions": [], "box_xyxy": [8, -1, 178, 16], "boxes_xyxy": [[8, -1, 178, 16]]}

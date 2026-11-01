@@ -1,0 +1,4 @@
+{"id": "ft000", "source_id": "doc_a", "text": "Adı: Ahmet Yılmaz", "fields": [{"start": 5, "end": 17, "type": "person_name"}], "relations": [{"head": "label", "tail": "person_name"}], "document_class": "form", "page_id": 0}
+{"id": "ft001", "source_id": "doc_a", "text": "Plaka: 20 ABC 123", "fields": [{"start": 7, "end": 17, "type": "plate"}], "relations": [{"head": "label", "tail": "plate"}], "document_class": "form", "page_id": 0}
+{"id": "ft002", "source_id": "doc_b", "text": "Toplam: 1.250,00 TL", "fields": [{"start": 8, "end": 19, "type": "amount"}], "relations": [{"head": "label", "tail": "amount"}], "document_class": "invoice", "page_id": 0}
+{"id": "ft003", "source_id": "doc_b", "text": "Belge No: 001234", "fields": [{"start": 10, "end": 16, "type": "document_number"}], "document_class": "invoice", "page_id": 0}

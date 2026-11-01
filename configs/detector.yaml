@@ -1,0 +1,76 @@
+model_name: detector
+
+input:
+  color: true
+  page_size: [768, 768]
+  keep_aspect: true
+  pad_value: 0
+
+patch:
+  height: 16
+  width: 16
+
+encoder:
+  d_model: 256
+  n_heads: 8
+  n_layers: 4
+  d_ff: 1024
+  dropout: 0.1
+  activation: gelu
+
+decoder:
+  d_model: 256
+  n_heads: 8
+  n_layers: 4
+  d_ff: 1024
+  dropout: 0.1
+  activation: gelu
+
+queries:
+  num_queries: 50
+
+box:
+  format: cxcywh
+  min_width: 0.01
+  min_height: 0.005
+
+loss:
+  presence_weight: 1.0
+  bbox_l1_weight: 5.0
+  giou_weight: 2.0
+  no_object_weight: 0.1
+  class_cost: 1.0
+  bbox_cost: 5.0
+  giou_cost: 2.0
+
+predict:
+  score_threshold: 0.5
+  merge_iou: 0.0
+
+data:
+  train_manifest: data/splits/detector_train.jsonl
+  val_manifest: data/splits/detector_val.jsonl
+  box_level: line
+  augment: true
+
+train:
+  batch_size: 4
+  learning_rate: 0.0001
+  weight_decay: 0.01
+  optimizer: adamw
+  scheduler: cosine
+  warmup_steps: 200
+  max_epochs: 20
+  grad_clip: 1.0
+  mixed_precision: false
+  grad_accum: 1
+  num_workers: 0
+  seed: 42
+  device: cuda
+  allow_cpu_fallback: true
+
+checkpoint:
+  dir: outputs/checkpoints/detector
+  save_every: 1
+  best_metric: f1
+  best_mode: max

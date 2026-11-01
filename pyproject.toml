@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "visual-nlp"
+version = "0.1.0"
+description = "Detector, reader, and Turkish document NLP models sharing a custom Transformer stack."
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{ name = "Visual NLP" }]
+dependencies = [
+    "torch>=2.1",
+    "pyyaml>=6.0",
+    "pillow>=10.0",
+    "numpy>=1.24",
+    "scipy>=1.11",
+    "tokenizers>=0.15",
+    "pypdfium2>=4.20",
+    "fonttools>=4.40",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.4"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-q"

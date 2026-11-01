@@ -1,0 +1,1 @@
+{"id": "fv000", "source_id": "doc_c", "text": "Düzenleme tarihi 01.11.2026", "fields": [{"start": 17, "end": 27, "type": "date"}], "relations": [{"head": "label", "tail": "date"}], "document_class": "form", "page_id": 0}
