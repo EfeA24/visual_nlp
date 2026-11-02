@@ -117,6 +117,17 @@ python scripts/predict_image.py --input path/to/page.png --mode full --reader-ch
 python scripts/predict_document.py --input path/to/doc.pdf --use-nlp --nlp-checkpoint outputs/checkpoints/nlp/best.pt
 ```
 
+The same JSON is also available over HTTP:
+
+```bash
+pip install -e ".[api]"
+python scripts/serve.py
+```
+
+`GET /health` reports which models are loaded. `POST /predict` accepts an image or PDF (`mode=line|full`, `use_nlp=true|false`) and returns the same `DocumentResult` payload as the CLI. Interactive docs: `http://127.0.0.1:8000/docs`.
+
+Checkpoint paths can be set with `VISUAL_NLP_READER_CHECKPOINT`, `VISUAL_NLP_DETECTOR_CHECKPOINT`, and `VISUAL_NLP_NLP_CHECKPOINT` (and matching `*_CONFIG` variables). If a checkpoint env var is omitted, `outputs/checkpoints/<model>/best.pt` is used when that file exists.
+
 Outputs keep raw text, completion flags, original-pixel boxes, normalized field values, and model versions. Truncated decodes are not marked complete. Confidence scores are not accuracy percentages.
 
 ## Known limits

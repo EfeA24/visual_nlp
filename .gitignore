@@ -1,0 +1,46 @@
+# Data (keep folder placeholders, split manifests, and raw documents)
+data/raw/**
+!data/raw/documents/
+!data/raw/documents/**
+data/synthetic/**
+!data/synthetic/manifest.jsonl
+data/processed/**
+!data/processed/*.jsonl
+data/splits/**
+!data/splits/*.jsonl
+data/fonts/**
+!data/**/.gitkeep
+
+# Experiment outputs
+outputs/checkpoints/**
+outputs/logs/**
+outputs/predictions/**
+!outputs/**/.gitkeep
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+dist/
+build/
+.venv/
+venv/
+env/
+*.so
+
+# Tools / IDE
+.idea/
+.vscode/
+.cursor/
+*.iml
+
+# Secrets and local env
+.env
+.env.*
+*.pem
+
+# OS
+.DS_Store
+Thumbs.db
